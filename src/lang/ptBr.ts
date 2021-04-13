@@ -21,12 +21,27 @@ const grid = 'ésãoumatrês meioldiadez duaseisetey quatrohnove cincoitonze zme
 //   ['D', 'E', 'Z', 'O', 'E', 'Y', 'C', 'I', 'N', 'C', 'O'],
 // ];
 
+interface ActivationLayer {
+  index: number /** Grid row index */;
+  indexStart: number /** Grid column index start */;
+  indexEnd: number /** Grid column index end */;
+  addPluralHour?: boolean /** If set to true, this activation layer should only be on if its a full hour and its name is plural */;
+  stopFullHour?: boolean /** If set to true, this activation layer should be the last one to be rendered at this time */;
+}
+
+interface LogicLayer {
+  [key: string]: ActivationLayer[];
+}
+
 /**
  * Hours logic
  */
 
-const hours = {
-  1: [],
+const hours: LogicLayer = {
+  1: [
+    { index: 0, indexStart: 0, indexEnd: 0 },
+    { index: 0, indexStart: 4, indexEnd: 6 },
+  ],
   2: [],
   3: [],
   4: [],
@@ -56,8 +71,8 @@ const hours = {
  * Minutes logic
  */
 
-const minutes = {
-  0: [],
+const minutes: LogicLayer = {
+  0: [{ index: 6, indexStart: 0, indexEnd: 3 }],
   5: [],
   10: [],
   15: [],

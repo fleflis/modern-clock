@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
 
 import Container from '../../components/Container';
 
+import ptBr from '../../lang/ptBr';
+
 const Home: React.FC = () => {
-  const [name] = useState('world');
+  const actualHour = '1';
+  const actualMinute = '0';
+
   return (
     <Container>
-      <h1>Hello, {name}!</h1>
-      <p>
-        You can change this text on <code>src/pages/home/index.tsx</code>, save
-        and preview here!
-      </p>
+      <div>
+        <table>
+          {ptBr.grid.map((row, i) => {
+            return (
+              <tr>
+                {row.map((column, j) => {
+                  let color = 'black';
+                  ptBr.logic.hours[actualHour].forEach((val) => {
+                    if (val.index === i) {
+                      if (j >= val.indexStart && j <= val.indexEnd) {
+                        color = 'red';
+                      }
+                    }
+                  });
+
+                  ptBr.logic.minutes[actualMinute].forEach((val) => {
+                    if (val.index === i) {
+                      if (j >= val.indexStart && j <= val.indexEnd) {
+                        color = 'red';
+                      }
+                    }
+                  });
+                  return <td style={{ color }}>{column}</td>;
+                })}
+              </tr>
+            );
+          })}
+        </table>
+      </div>
     </Container>
   );
 };
