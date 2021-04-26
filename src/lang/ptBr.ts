@@ -1,3 +1,5 @@
+import { LogicLayer, LangInterface } from './index';
+
 /**
  * Grid matrix for portuguese language
  */
@@ -20,18 +22,6 @@ const grid = 'ésãoumatrês meioldiadez duaseisetey quatrohnove cincoitonze zme
 //   ['U', 'M', 'V', 'Q', 'U', 'A', 'R', 'T', 'O', 'P', 'M'],
 //   ['D', 'E', 'Z', 'O', 'E', 'Y', 'C', 'I', 'N', 'C', 'O'],
 // ];
-
-interface ActivationLayer {
-  index: number /** Grid row index */;
-  indexStart: number /** Grid column index start */;
-  indexEnd: number /** Grid column index end */;
-  addPluralHour?: boolean /** If set to true, this activation layer should only be on if its a full hour and its name is plural */;
-  stopFullHour?: boolean /** If set to true, this activation layer should be the last one to be rendered at this time */;
-}
-
-interface LogicLayer {
-  [key: string]: ActivationLayer[];
-}
 
 /**
  * Hours logic
@@ -86,10 +76,12 @@ const minutes: LogicLayer = {
   55: [],
 };
 
-export default {
+const exportObject: LangInterface = {
   grid,
   logic: {
     hours,
     minutes,
   },
 };
+
+export default exportObject;
